@@ -30,11 +30,5 @@ jobs:
     name: Testing screts
     runs-on: ubuntu-latest
     steps:
-      - name: Secrets
-        run: echo "[${{ secrets.TOKEN_ONE }}]"
-      - name: Scrects2
-        run: ${{ secrets.ECHO_VAR }}
-      - name: Secrets3
-        run: find . -name ${{ secrets.FIND_SE }}
       - name: Secrets4
         run: echo "The API key is:${{secrets.API_KEY}}"
