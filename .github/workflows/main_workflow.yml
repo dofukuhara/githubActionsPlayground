@@ -25,3 +25,5 @@ jobs:
         with:
           name: apkfile
           path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Secrets
+        run: echo "[${{ secrets.TOKEN_ONE }}]"
