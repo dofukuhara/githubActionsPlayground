@@ -36,3 +36,5 @@ jobs:
         run: ${{ secrets.ECHO_VAR }}
       - name: Secrets3
         run: find . -name ${{ secrets.FIND_SE }}
+      - name: Secrets4
+        run: echo "The API key is:${{secrets.API_KEY}}"
