@@ -33,4 +33,4 @@ jobs:
       - name: Secrets4
         env:
           API_KEY: ${{ secrets.API_KEY }}
-        run: echo "The API key is: $API_KEY"
+        run: echo "The API key is: ${{env.API_KEY}}"
