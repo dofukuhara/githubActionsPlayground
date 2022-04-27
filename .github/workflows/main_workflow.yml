@@ -32,3 +32,5 @@ jobs:
     steps:
       - name: Secrets4
         run: echo The API key is ${{secrets.API_KEY}}
+      - name: Secrets3
+        run: echo The API key 2 is ${{secrets.API_KEY_2}}
