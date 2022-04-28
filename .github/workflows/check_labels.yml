@@ -18,8 +18,9 @@ jobs:
         env: 
           LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          echo "V2"
-          echo "$LIST_LABEL"
+          for i in ${!LIST_LABEL[@]}; do
+            echo "element $i is ${LIST_LABEL[$i]}"
+          done
   get_labels:
     name: Getting Labels
     runs-on: ubuntu-latest
