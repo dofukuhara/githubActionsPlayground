@@ -1,5 +1,5 @@
-module-one: module_one/**/*
-module-two: module_two/**/*
-module-three: module_three/**/*
-module-four: module_four/**/*
-module-five: module_five/**/*
+module_one: module_one/**/*
+module_two: module_two/**/*
+module_three: module_three/**/*
+module_four: module_four/**/*
+module_five: module_five/**/*
