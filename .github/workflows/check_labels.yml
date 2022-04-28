@@ -8,7 +8,7 @@ jobs:
     name: Getting Labels
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
+      matrix: ${{ steps.set-matrix.outputs.value }}
     steps:
       - id: matrix
         run: |
