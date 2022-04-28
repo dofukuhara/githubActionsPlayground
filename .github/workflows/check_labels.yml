@@ -4,10 +4,21 @@ on:
   pull_request:
 
 jobs:
-  check_labels:
+  get_labels:
+    name: Getting Labels
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.output.value }}
     steps:
-      - name: Parsing labels
+      - id: matrix
         run: |
-          labels_in_pr=${{ github.event.pull_request.labels.*.name }}
-          echo "Size of array: ${{labels_in_pr[@]}}"
+          echo ::set-output name=value::$(echo ${{ github.event.pull_request.labels.*.name }})"
+  run_label_check:
+    needs: [ get_labels ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value: ${{ fromJson(needs.get_labels.outputs.matrix) }}
+    steps:
+      - run: |
+        echo "${{ matrix.value }}"
