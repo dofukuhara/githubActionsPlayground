@@ -1,0 +1,16 @@
+name: "Check Labels"
+
+on:
+  workflow_run:
+    workflows: ["Pull Request Labeler"]
+    types:
+      - completed
+
+jobs:
+  check_labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parsing labels
+        run: |
+          labels_in_pr=${{ toJson(github.event.pull_request.labels.*.name) }}
+          echo $labels_in_pr
