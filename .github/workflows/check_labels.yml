@@ -9,7 +9,5 @@ jobs:
     steps:
       - name: Parsing labels
         run: |
-          labels_in_pr=${{ toJson(github.event.pull_request.labels.*.name) }}
-          echo $labels_in_pr
-          echo "x: ${{ github.event.pull_request.labels }}"
-          echo "This PR was opened by ${{ github.event.pull_request.user.login }}."
+          labels_in_pr=${{ github.event.pull_request.labels.*.name }}
+          echo "Size of array: ${labels_in_pr[@]}"
