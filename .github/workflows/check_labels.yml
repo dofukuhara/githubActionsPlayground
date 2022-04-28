@@ -12,7 +12,7 @@ jobs:
     steps:
       - id: matrix
         run: |
-          echo ::set-output name=value::$(echo ${{ github.event.pull_request.labels.*.name }})"
+          echo "::set-output name=value::$(echo ${{ github.event.pull_request.labels.*.name }})"
   run_label_check:
     needs: [ get_labels ]
     runs-on: ubuntu-latest
