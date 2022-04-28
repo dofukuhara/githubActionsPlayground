@@ -1,0 +1,5 @@
+module-one: module-one/**/*
+module-two: module-two/**/*
+module-three: module-three/**/*
+module-four: module-four/**/*
+module-five: module-five/**/*
