@@ -22,6 +22,8 @@ jobs:
             echo "element $i is ${LIST_LABEL[$i]}"
           done
           echo "$LIST_LABEL" | jq
+          echo "$LIST_LABEL" | jq length
+          list_length=$(echo "$LIST_LABEL" | jq length)
   list_of_labels_v3:
     name: Listing labels v3
     runs-on: ubuntu-latest
