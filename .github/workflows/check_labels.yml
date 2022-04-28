@@ -22,4 +22,4 @@ jobs:
     steps:
       - id: run_label
         run: |
-        echo "${{ matrix.value }}"
+          echo "${{ matrix.value }}"
