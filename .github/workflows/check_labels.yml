@@ -21,6 +21,7 @@ jobs:
           for i in ${!LIST_LABEL[@]}; do
             echo "element $i is ${LIST_LABEL[$i]}"
           done
+          echo "$LIST_LABEL" | jq
   list_of_labels_v3:
     name: Listing labels v3
     runs-on: ubuntu-latest
