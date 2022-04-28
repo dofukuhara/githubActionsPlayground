@@ -2,6 +2,8 @@ name: "Pull Request Labeler"
 
 on:
   - pull_request
+  issue_comment:
+    types: [edited]
 
 jobs:
   triage:

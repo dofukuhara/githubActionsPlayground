@@ -14,3 +14,4 @@ jobs:
         run: |
           labels_in_pr=${{ toJson(github.event.pull_request.labels.*.name) }}
           echo $labels_in_pr
+          echo "x: ${{ github.event.pull_request.labels }}"
