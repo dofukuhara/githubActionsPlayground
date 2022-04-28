@@ -4,6 +4,12 @@ on:
   pull_request:
 
 jobs:
+  dump_github_context:
+    name: Dump GitHub Context
+    runs-on: ubuntu-latest
+    steps:
+      - id: dump
+        run: echo ${{ toJson(github) }}
   get_labels:
     name: Getting Labels
     runs-on: ubuntu-latest
