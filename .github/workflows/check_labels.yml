@@ -10,6 +10,16 @@ jobs:
     steps:
       - name: Listing
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
+  list_of_labels_v2:
+    name: Listing labels v2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Listing v2
+        env: 
+          LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
+        run: |
+          echo "V2"
+          echo "$LIST_LABEL"
   get_labels:
     name: Getting Labels
     runs-on: ubuntu-latest
