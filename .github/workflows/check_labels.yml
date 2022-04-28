@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: dump
-        run: echo ${{ toJson(github) }}
+        env: GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
   get_labels:
     name: Getting Labels
     runs-on: ubuntu-latest
