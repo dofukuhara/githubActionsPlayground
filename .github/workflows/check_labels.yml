@@ -24,15 +24,6 @@ jobs:
           echo "$LIST_LABEL" | jq
           echo "$LIST_LABEL" | jq length
           list_length=$(echo "$LIST_LABEL" | jq length)
-  list_of_labels_v3:
-    name: Listing labels v3
-    runs-on: ubuntu-latest
-    steps:
-      - name: Listing v3
-        env:
-          LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
-        run: |
-          list_length=$(echo "$LIST_LABEL" | jq length)
           list_length=$((list_length - 1))
           for i in `seq 0 $list_length`; do
             module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
