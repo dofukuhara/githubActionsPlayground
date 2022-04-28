@@ -20,5 +20,6 @@ jobs:
       matrix:
         value: ${{ fromJson(needs.get_labels.outputs.matrix) }}
     steps:
-      - run: |
+      - id: run_label
+        run: |
         echo "${{ matrix.value }}"
