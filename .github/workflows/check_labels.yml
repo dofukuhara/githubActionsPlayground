@@ -10,4 +10,4 @@ jobs:
       - name: Parsing labels
         run: |
           labels_in_pr=${{ github.event.pull_request.labels.*.name }}
-          echo "Size of array: ${labels_in_pr[@]}"
+          echo "Size of array: ${{labels_in_pr[@]}}"
