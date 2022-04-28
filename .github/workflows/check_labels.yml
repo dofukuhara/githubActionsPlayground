@@ -10,16 +10,17 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.value }}
     steps:
-      - id: matrix
+      - id: set-matrix
         run: |
           echo "::set-output name=value::${{ github.event.pull_request.labels.*.name }}"
   run_label_check:
-    needs: [ get_labels ]
+    needs: get_labels
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{ fromJson(needs.get_labels.outputs.matrix) }}
+        value:
+          - ${{fromJson(needs.get_labels.outputs.matrix)}}
     steps:
       - id: run_label
         run: |
-          echo "${{ matrix.value }}"
+          echo ${{ matrix.value }}
