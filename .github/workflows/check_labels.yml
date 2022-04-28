@@ -1,10 +1,7 @@
 name: "Check Labels"
 
 on:
-  workflow_run:
-    workflows: ["Pull Request Labeler"]
-    types:
-      - completed
+  pull_request:
 
 jobs:
   check_labels:
