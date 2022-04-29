@@ -25,9 +25,9 @@ jobs:
           for i in `seq 0 $list_length`; do
             module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
             echo "Module: $module"
-            ls "${module}" 2>/dev/null
-            command_result=$?
-            if [ "$command_result" -gt 0 ]; then
+
+            command_result=$(find . -name "${module}")
+            if [ -z "$command_result" ]; then
               echo "NOT FOUND"
             else
               echo "FOUND"
