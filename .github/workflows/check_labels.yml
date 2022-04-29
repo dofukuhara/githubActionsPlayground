@@ -35,6 +35,7 @@ jobs:
             echo "Module: $module"
             ls
             ls "${module}" 2>/dev/null
+            echo "TESTING"
             command_result=$?
             echo "Result -> $command_result"
             if [ "$command_result" -gt 0 ]; then
