@@ -14,6 +14,8 @@ jobs:
     name: Listing labels v2
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Listing v2
         env:
           LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
