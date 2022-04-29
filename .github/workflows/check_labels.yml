@@ -31,6 +31,7 @@ jobs:
             echo "For loop [${i}]"
             module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
             echo "Module: $module"
+            ls
             ls "${module}" 2>/dev/null
             command_result=$?
             echo "Result -> $command_result"
