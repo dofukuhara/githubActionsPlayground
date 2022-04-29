@@ -26,8 +26,11 @@ jobs:
           list_length=$(echo "$LIST_LABEL" | jq length)
           echo "-> $list_length"
           list_length=$((list_length - 1))
+          echo "--> $list_length"
           for i in `seq 0 $list_length`; do
+            echo "For loop [${i}]"
             module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
+            echo "Module: $module"
             ls "${module}" 2>/dev/null
             command_result=$?
             echo "Result -> $command_result"
