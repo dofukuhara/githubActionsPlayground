@@ -24,6 +24,7 @@ jobs:
           echo "$LIST_LABEL" | jq
           echo "$LIST_LABEL" | jq length
           list_length=$(echo "$LIST_LABEL" | jq length)
+          echo "-> $list_length"
           list_length=$((list_length - 1))
           for i in `seq 0 $list_length`; do
             module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
