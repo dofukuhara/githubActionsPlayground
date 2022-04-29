@@ -20,23 +20,13 @@ jobs:
         env:
           LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
-          for i in ${!LIST_LABEL[@]}; do
-            echo "element $i is ${LIST_LABEL[$i]}"
-          done
-          echo "$LIST_LABEL" | jq
-          echo "$LIST_LABEL" | jq length
           list_length=$(echo "$LIST_LABEL" | jq length)
-          echo "-> $list_length"
           list_length=$((list_length - 1))
-          echo "--> $list_length"
           for i in `seq 0 $list_length`; do
-            echo "For loop [${i}]"
             module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
             echo "Module: $module"
-            ls
             ls "${module}" 2>/dev/null
             command_result=$?
-            echo "Result -> $command_result"
             if [ "$command_result" -gt 0 ]; then
               echo "NOT FOUND"
             else
