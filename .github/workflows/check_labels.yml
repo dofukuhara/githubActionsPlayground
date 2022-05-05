@@ -4,7 +4,14 @@ on:
   pull_request:
 
 jobs:
+  checkout_code:
+    name: Checkout code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
   list_of_labels:
+    needs: [checkout_code]
     name: List labels
     runs-on: ubuntu-latest
     steps:
@@ -32,8 +39,6 @@ jobs:
         value:
           - ${{fromJson(needs.get_modified_files.outputs.matrix)}}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Listing v2
         env:
           LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
