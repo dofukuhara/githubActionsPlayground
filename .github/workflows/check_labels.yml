@@ -33,6 +33,10 @@ jobs:
               echo "FOUND"
             fi
           done
+          git branch
+          mapfile -t changed_files < <(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
+          printf 'changed file: %s\n' ${changed_files[*]}
+          echo "---> END <---"
   get_labels:
     name: Getting Labels
     runs-on: ubuntu-latest
