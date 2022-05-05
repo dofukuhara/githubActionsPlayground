@@ -10,12 +10,19 @@ jobs:
     steps:
       - name: Listing
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
+  get_modified_files:
+    name: Get Modified Files
+    uses: jitterbit/get-changed-files@v1
+    run: |
+      for changed_file in ${{ steps.files.outputs.all }}; do
+        echo "Do something with this ${changed_file}."
+      done
   list_of_labels_v2:
     name: Listing labels v2
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Listing v2
         env:
           LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
