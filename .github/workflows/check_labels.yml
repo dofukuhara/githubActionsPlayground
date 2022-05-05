@@ -15,10 +15,10 @@ jobs:
     name: Get Modified Files
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-file_changes.outputs.value }}
+      matrix: ${{ steps.set_file_changes.outputs.value }}
     steps:
       - name: Print list of files changed
-        id: file_changes
+        id: set_file_changes
         uses: trilom/file-changes-action@v1.2.3
       - run: |
           echo '${{ steps.file_changes.outputs.files}}'
@@ -62,9 +62,9 @@ jobs:
     name: Getting Labels
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.value }}
+      matrix: ${{ steps.set_matrix.outputs.value }}
     steps:
-      - id: set-matrix
+      - id: set_matrix
         run: |
           echo "::set-output name=value::${{ toJson(github.event.pull_request.labels.*.name) }}"
   run_label_check:
