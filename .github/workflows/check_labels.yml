@@ -24,6 +24,8 @@ jobs:
     outputs:
       matrix: ${{ steps.set_file_changes.outputs.value }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Print list of files changed
         id: set_file_changes
         uses: trilom/file-changes-action@v1.2.3
