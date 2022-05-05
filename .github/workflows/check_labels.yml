@@ -21,7 +21,7 @@ jobs:
       - run: |
           echo '${{ steps.file_changes.outputs.files}}'
   list_of_labels_v2:
-    needs: [list_of_labels. get_modified_files]
+    needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +49,7 @@ jobs:
           printf 'changed file: %s\n' ${changed_files[*]}
           echo "---> END <---"
   get_labels:
-    needs: [list_of_labels. get_modified_files, list_of_labels_v2]
+    needs: [list_of_labels, get_modified_files, list_of_labels_v2]
     name: Getting Labels
     runs-on: ubuntu-latest
     outputs:
@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "::set-output name=value::${{ toJson(github.event.pull_request.labels.*.name) }}"
   run_label_check:
-    needs: [list_of_labels. get_modified_files, list_of_labels_v2. get_labels]
+    needs: [list_of_labels, get_modified_files, list_of_labels_v2. get_labels]
     runs-on: ubuntu-latest
     strategy:
       matrix:
