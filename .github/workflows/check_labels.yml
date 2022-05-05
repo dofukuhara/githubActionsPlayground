@@ -5,21 +5,23 @@ on:
 
 jobs:
   list_of_labels:
-    name: Listing labels
+    name: List labels
     runs-on: ubuntu-latest
     steps:
-      - name: Listing
+      - name: Print labels from PR
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
   get_modified_files:
+    needs: [list_of_labels]
     name: Get Modified Files
     runs-on: ubuntu-latest
     steps:
-      - name: Init
+      - name: Print list of files changed
         id: file_changes
         uses: trilom/file-changes-action@v1.2.3
       - run: |
           echo '${{ steps.file_changes.outputs.files}}'
   list_of_labels_v2:
+    needs: [list_of_labels. get_modified_files]
     name: Listing labels v2
     runs-on: ubuntu-latest
     steps:
@@ -47,6 +49,7 @@ jobs:
           printf 'changed file: %s\n' ${changed_files[*]}
           echo "---> END <---"
   get_labels:
+    needs: [list_of_labels. get_modified_files, list_of_labels_v2]
     name: Getting Labels
     runs-on: ubuntu-latest
     outputs:
@@ -56,7 +59,7 @@ jobs:
         run: |
           echo "::set-output name=value::${{ toJson(github.event.pull_request.labels.*.name) }}"
   run_label_check:
-    needs: get_labels
+    needs: [list_of_labels. get_modified_files, list_of_labels_v2. get_labels]
     runs-on: ubuntu-latest
     strategy:
       matrix:
