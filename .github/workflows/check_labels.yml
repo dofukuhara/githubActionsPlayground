@@ -14,15 +14,12 @@ jobs:
     needs: [list_of_labels]
     name: Get Modified Files
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set_file_changes.outputs.value }}
     steps:
-      - id: set_file_changes
+      - name: Init
+        id: file_changes
         uses: trilom/file-changes-action@v1.2.3
-      - name: Print list of files changed
-        run: |
+      - run: |
           echo '${{ steps.file_changes.outputs.files}}'
-          echo "::set-output name=value::${{ steps.file_changes.outputs.files }}"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
