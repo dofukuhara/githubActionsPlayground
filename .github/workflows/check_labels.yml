@@ -14,16 +14,23 @@ jobs:
     needs: [list_of_labels]
     name: Get Modified Files
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-file_changes.outputs.value }}
     steps:
       - name: Print list of files changed
         id: file_changes
         uses: trilom/file-changes-action@v1.2.3
       - run: |
           echo '${{ steps.file_changes.outputs.files}}'
+          echo "::set-output name=value::${{ toJson(steps.file_changes.outputs.files) }}"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value:
+          - ${{fromJson(needs.get_modified_files.outputs.matrix)}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -48,6 +55,8 @@ jobs:
           mapfile -t changed_files < <(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
           printf 'changed file: %s\n' ${changed_files[*]}
           echo "---> END <---"
+          echo ${{ matrix.value }}
+          echo "---> END2 <---"
   get_labels:
     needs: [list_of_labels, get_modified_files, list_of_labels_v2]
     name: Getting Labels
