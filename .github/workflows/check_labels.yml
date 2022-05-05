@@ -36,10 +36,6 @@ jobs:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        value:
-          - ${{fromJson(needs.get_modified_files.outputs.matrix)}}
     steps:
       - name: Listing v2
         env:
