@@ -15,11 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Init
-        uses: jitterbit/get-changed-files@v1
+        id: file_changes
+        uses: trilom/file-changes-action@v1.2.3
       - run: |
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "Do something with this ${changed_file}."
-          done
+          echo '${{ steps.file_changes.outputs.files}}'
   list_of_labels_v2:
     name: Listing labels v2
     runs-on: ubuntu-latest
