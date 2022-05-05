@@ -17,12 +17,10 @@ jobs:
     outputs:
       matrix: ${{ steps.set_file_changes.outputs.value }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Print list of files changed
-        id: set_file_changes
+      - id: set_file_changes
         uses: trilom/file-changes-action@v1.2.3
-      - run: |
+      - name: Print list of files changed
+        run: |
           echo '${{ steps.file_changes.outputs.files}}'
           echo "::set-output name=value::${{ steps.file_changes.outputs.files }}"
   list_of_labels_v2:
