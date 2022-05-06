@@ -17,12 +17,12 @@ jobs:
     outputs:
       matrix: ${{ steps.file_changes.outputs.value }}
     steps:
-      - name: Plugin setup
+      - name: Init
         uses: trilom/file-changes-action@v1.2.3
-      - name: Get files
-        id: file_changes
-        env:
+        id: file_changes_one
+      - env:
           LIST_OF_CHANGED_FILES:  ${{ steps.file_changes.outputs.files}}
+        id: file_changes
         run: |
           var_one=$(echo  $LIST_OF_CHANGED_FILES | jq )
           echo "::set-output name=value::${var_one}"
@@ -35,7 +35,7 @@ jobs:
       - name: Test in same step
         run: |
           echo ${{ steps.file_changes.outputs.matrix }}
-          echo "END 64"
+          echo "END 65"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
