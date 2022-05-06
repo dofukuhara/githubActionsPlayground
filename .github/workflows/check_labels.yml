@@ -28,10 +28,10 @@ jobs:
           echo "Print raw 1"
           echo '${{ steps.file_changes.outputs.files}}'
           echo "Print raw 2 (LIST_OF_CHANGED_FILES)"
-          echo "$LIST_OF_CHANGED_FILES'
+          echo "$LIST_OF_CHANGED_FILES"
           echo "Print jq"
           echo "${var_one}"
-          echo "END 61"
+          echo "END 62"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
