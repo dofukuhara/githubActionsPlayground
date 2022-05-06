@@ -31,7 +31,10 @@ jobs:
           echo "$LIST_OF_CHANGED_FILES"
           echo "Print jq"
           echo "${var_one}"
-          echo "END 62"
+      - name: Test in same step
+        run: |
+          echo ${{ steps.file_changes.outputs.matrix }}
+          echo "END 63"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
