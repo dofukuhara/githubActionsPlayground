@@ -24,14 +24,14 @@ jobs:
           LIST_OF_CHANGED_FILES:  ${{ steps.file_changes.outputs.files}}
         run: |
           var_one=$(echo  $LIST_OF_CHANGED_FILES | jq )
-          echo "::set-output name=value::'${var_one}'"
+          echo "::set-output name=value::${var_one}"
           echo "Print raw 1"
           echo '${{ steps.file_changes.outputs.files}}'
           echo "Print raw 2 (LIST_OF_CHANGED_FILES)"
-          echo '$LIST_OF_CHANGED_FILES'
+          echo "$LIST_OF_CHANGED_FILES'
           echo "Print jq"
           echo "${var_one}"
-          echo "END 60"
+          echo "END 61"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
