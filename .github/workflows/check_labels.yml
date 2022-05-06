@@ -22,9 +22,9 @@ jobs:
         uses: trilom/file-changes-action@v1.2.3
       - run: |
           var_one=$(echo  ${{ steps.file_changes.outputs.files}} | jq )
-          echo "::set-output name=value::${{ toJson(var_one) }}"
+          echo "::set-output name=value::${{ toJson($var_one) }}"
           echo '${{ steps.file_changes.outputs.files}}'
-          echo "END 57"
+          echo "END 58"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
