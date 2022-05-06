@@ -18,11 +18,10 @@ jobs:
       matrix: ${{ steps.file_changes.outputs.value }}
     steps:
       - name: Init
+        id: file_changes
         uses: trilom/file-changes-action@v1.2.3
-        id: file_changes_one
       - env:
           LIST_OF_CHANGED_FILES:  ${{ steps.file_changes.outputs.files}}
-        id: file_changes
         run: |
           var_one=$(echo  $LIST_OF_CHANGED_FILES | jq )
           echo "::set-output name=value::${var_one}"
@@ -32,10 +31,7 @@ jobs:
           echo "$LIST_OF_CHANGED_FILES"
           echo "Print jq"
           echo "${var_one}"
-      - name: Test in same step
-        run: |
-          echo ${{ steps.file_changes.outputs.matrix }}
-          echo "END 65"
+          echo "END 66"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
     name: Listing labels v2
@@ -46,6 +42,7 @@ jobs:
       - name: Listing v2
         env:
           LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
+          LIST_OF_CHANGED_FILES:  ${{ steps.file_changes.outputs.files}}
         run: |
           list_length=$(echo "$LIST_LABEL" | jq length)
           list_length=$((list_length - 1))
@@ -64,7 +61,7 @@ jobs:
           mapfile -t changed_files < <(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
           printf 'changed file: %s\n' ${changed_files[*]}
           echo "---> END <---"
-          echo ${{ matrix.value }}
+          echo ${LIST_OF_CHANGED_FILES}
           echo "---> END2 <---"
   get_labels:
     needs: [list_of_labels, get_modified_files, list_of_labels_v2]
