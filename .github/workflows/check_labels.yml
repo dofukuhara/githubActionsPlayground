@@ -20,9 +20,9 @@ jobs:
       - name: Init
         id: file_changes
         uses: trilom/file-changes-action@v1.2.3
-      - run: |
-          echo '${{ steps.file_changes.outputs.files}}'
+        run: |
           echo "::set-output name=value::${{ toJson(steps.file_changes.outputs.files) }}"
+          echo '${{ steps.file_changes.outputs.files}}'
           echo "END"
   list_of_labels_v2:
     needs: [list_of_labels, get_modified_files]
