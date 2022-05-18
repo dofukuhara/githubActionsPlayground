@@ -1,0 +1,13 @@
+name: "Another Workflow"
+
+on:
+  pull_request:
+
+
+jobs:
+  source_code:
+    name: Sync source code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Source Code checkout
+        uses: actions/checkout@v3
