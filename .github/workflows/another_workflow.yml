@@ -5,9 +5,22 @@ on:
 
 
 jobs:
-  source_code:
-    name: Sync source code
+  build_apk:
+    name: Build source Code
     runs-on: ubuntu-latest
     steps:
       - name: Source Code checkout
         uses: actions/checkout@v3
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug
+      - name: Archive apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-build
+          path: app/build/outputs/apk/debug/app-debug.apk
