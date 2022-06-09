@@ -11,11 +11,9 @@ jobs:
       - name: Print labels from PR
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
       - name: Test
-        env:
-          LIST_OF_LABELS: ${{ github.event.pull_request.labels.*.name }}
         run: |
           echo "List of labels:"
-          echo "$LIST_OF_LABELS"
+          echo "${{ github.event.pull_request.labels.*.name }}"
   get_modified_files:
     needs: [list_of_labels]
     name: Get Modified Files
