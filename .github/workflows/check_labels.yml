@@ -80,14 +80,3 @@ jobs:
       - id: set_matrix
         run: |
           echo "::set-output name=value::${{ toJson(github.event.pull_request.labels.*.name) }}"
-  run_label_check:
-    needs: [list_of_labels, get_modified_files, list_of_labels_v2, get_labels]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        value:
-          - ${{fromJson(needs.get_labels.outputs.matrix)}}
-    steps:
-      - id: run_label
-        run: |
-          echo ${{ matrix.value }}
