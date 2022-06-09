@@ -11,9 +11,27 @@ jobs:
       - name: Print labels from PR
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
       - name: Test
+        env:
+          LIST_LABEL: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
+
+          module_list=""
+          list_length=$(echo "$LIST_LABEL" | jq length)
+          list_length=$((list_length - 1))
+          for i in $(seq 0 $list_length); do
+            module=$(echo "$LIST_LABEL" | jq .["$i"] | cut -d "\"" -f 2)
+            module_list="${module_list}${module} "
+          done
+
           echo "List of labels:"
-          echo "${{ github.event.pull_request.labels.*.name }}"
+          echo "$module_list"
+          if [ -z "$module_list" ]; then
+            echo "empty list"
+          else
+            echo "list has items"
+          fi
+
+
   get_modified_files:
     needs: [list_of_labels]
     name: Get Modified Files
