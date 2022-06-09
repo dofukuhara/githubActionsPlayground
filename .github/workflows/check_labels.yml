@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: Print labels from PR
         run: echo "${{ toJson(github.event.pull_request.labels.*.name) }}"
-    steps:
       - name: Test
         env:
           LIST_OF_LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
